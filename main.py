@@ -7,12 +7,13 @@ Basic example for a bot that uses inline keyboards. For an in-depth explanation,
  https://github.com/python-telegram-bot/python-telegram-bot/wiki/InlineKeyboard-Example.
 """
 import logging
+from tkinter import Button
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update, WebAppInfo
-from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes
+from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, filters
 
 TOKEN = "7096248383:AAGpXeaj0a2UglSAckDy6JAjelETMAjiRSA"
-
+GAME_SHORT_GAME = "camel"
 # Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
@@ -26,7 +27,7 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/camel_app/"),)
+    button1 = KeyboardButton(text='🎮Start Playing',)
     button2 = KeyboardButton('🐫Game Introduction')
     
 
@@ -37,16 +38,28 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # 发送消息并附带键盘
     await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
 
+async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [
+            InlineKeyboardButton("Play", callback_data= "game"),
+            InlineKeyboardButton("other",callback_data= "other")
+        ],
+    ]
+    # reply_markup = InlineKeyboardMarkup(keyboard)
+    #await update.message.reply_game(game_short_name="gggame",reply_markup=reply_markup)
+    await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME)
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
-    query = update.callback_query
-
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+    cqid = update.callback_query.id
+    query = update.callback_query
+    logger.info(update.callback_query)
     await query.answer()
-
-    await query.edit_message_text(text=f"Selected option: {query.data}")
+    choose = query.data
+    if choose == None:
+        await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='http://yallajamel.com/')
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -59,6 +72,12 @@ def main() -> None:
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(TOKEN).build()
 
+    gamelink_handler = MessageHandler((filters.Regex('🎮Start Playing')),playgame)
+    game_handler = CommandHandler('game',playgame)
+    # play_handler = CallbackQueryHandler(Button)
+
+    application.add_handler(gamelink_handler)
+    application.add_handler(game_handler)
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button))
     application.add_handler(CommandHandler("help", help_command))
