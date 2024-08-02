@@ -8,7 +8,7 @@ Basic example for a bot that uses inline keyboards. For an in-depth explanation,
 """
 import logging
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update, WebAppInfo
 from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes
 
 TOKEN = "7096248383:AAGpXeaj0a2UglSAckDy6JAjelETMAjiRSA"
@@ -26,8 +26,9 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton('🎮Start Playing')
+    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/ohayo_op/"),)
     button2 = KeyboardButton('🐫Game Introduction')
+    
 
     # 创建键盘
     keyboard = [[button1, button2],[KeyboardButton('☎️Help Center'), KeyboardButton('📨Opinions')]]
