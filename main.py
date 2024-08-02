@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/ohayo_op/"),)
+    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/camel_app/"),)
     button2 = KeyboardButton('🐫Game Introduction')
     
 
@@ -51,7 +51,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Displays info on how to use the bot."""
-    await update.message.reply_text("Use /start to test this bot.")
+    await update.message.reply_text("Use /game to start playing.")
 
 
 def main() -> None:
