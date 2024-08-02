@@ -56,9 +56,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     logger.info(update.callback_query)
     await query.answer()
-    choose = query.data
-    if choose == None:
-        await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='http://yallajamel.com/')
+    await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='http://yallajamel.com/')
+    # choose = query.data
+    # if choose == None:
+        
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
