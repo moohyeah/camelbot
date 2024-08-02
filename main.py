@@ -54,9 +54,14 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     cqid = update.callback_query.id
     query = update.callback_query
-    logger.info(cqid)
     await query.answer()
-    await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='http://yallajamel.com/')
+    # if query.inline_message_id
+    logger.info(query.data)
+    if query.data == None:
+        await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
+    else :
+        await context.bot.answerInlineQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
+
     # choose = query.data
     # if choose == None:
         
