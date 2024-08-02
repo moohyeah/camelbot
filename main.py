@@ -34,7 +34,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     # 发送消息并附带键盘
-    update.message.reply_text('请选择一个按钮:', reply_markup=reply_markup)
+    await update.message.reply_text('请选择一个按钮:', reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
