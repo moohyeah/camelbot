@@ -7,7 +7,6 @@ Basic example for a bot that uses inline keyboards. For an in-depth explanation,
  https://github.com/python-telegram-bot/python-telegram-bot/wiki/InlineKeyboard-Example.
 """
 import logging
-from tkinter import Button
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update, WebAppInfo
 from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, filters
@@ -74,7 +73,6 @@ def main() -> None:
 
     gamelink_handler = MessageHandler((filters.Regex('🎮Start Playing')),playgame)
     game_handler = CommandHandler('game',playgame)
-    # play_handler = CallbackQueryHandler(Button)
 
     application.add_handler(gamelink_handler)
     application.add_handler(game_handler)
