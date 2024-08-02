@@ -56,7 +56,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
     # if query.inline_message_id
-    ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,url='https://game.ohayoaptos.com/camel_app/')
+    ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,url='https://t.me/Yalla_Jamel_Bot?game=camel')
     logger.info(ret)
     # if query.data == None:
     #     await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
