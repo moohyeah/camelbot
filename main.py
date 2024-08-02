@@ -26,15 +26,15 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton('按钮1')
-    button2 = KeyboardButton('按钮2')
+    button1 = KeyboardButton('🎮Start Playing')
+    button2 = KeyboardButton('🐫Game Introduction')
 
     # 创建键盘
-    keyboard = [[button1, button2]]
+    keyboard = [[button1, button2],[KeyboardButton('☎️Help Center'), KeyboardButton('📨Opinions')]]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     # 发送消息并附带键盘
-    await update.message.reply_text('请选择一个按钮:', reply_markup=reply_markup)
+    await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
