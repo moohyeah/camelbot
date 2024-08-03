@@ -38,7 +38,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
 
 async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    keyboard = [[InlineKeyboardButton(text="Play Game", url="https://game.ohayoaptos.com/camel_app/")]]
+    keyboard = [[InlineKeyboardButton(text="Play Yalla Jamel", url="https://game.ohayoaptos.com/camel_app/")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME, reply_markup=reply_markup)
 
