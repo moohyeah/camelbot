@@ -41,7 +41,7 @@ async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton(text="Play Yalla Jamel", url="https://game.ohayoaptos.com/camel_app/")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await context.bot.send_photo(chat_id=update.effective_chat.id, 
-                                photo="https://game.ohayoaptos.com/camel_app/camel.gif",
+                                photo="https://game.ohayoaptos.com/camel_app/vfdd.jpg",
                                 caption="There are 7 slots at the bottom of the game, players only need to place 3 pieces of the same bricks into the slots and they will compete. Brick cannot be moved if there is not one brick above it.", 
                                 reply_markup=reply_markup)
     # context.bot.send_message()
