@@ -71,7 +71,7 @@ def main() -> None:
     gamelink_handler = MessageHandler((filters.Regex('🐫Game Introduction')),playgame)
     game_handler = CommandHandler('game',playgame)
 
-    # application.add_handler(gamelink_handler)
+    application.add_handler(gamelink_handler)
     application.add_handler(game_handler)
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button))
