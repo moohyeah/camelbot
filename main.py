@@ -18,7 +18,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
 # set higher logging level for httpx to avoid all GET and POST requests being logged
-logging.getLogger("httpx").setLevel(logging.DEBUG)
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton(text='🎮Start Playing')
+    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/camel_app/"))
     button2 = KeyboardButton('🐫Game Introduction')
     
 
@@ -38,14 +38,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
 
 async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    keyboard = [
-        [
-            InlineKeyboardButton("Play", callback_data= "game"),
-            InlineKeyboardButton("other",callback_data= "other")
-        ],
-    ]
-    # reply_markup = InlineKeyboardMarkup(keyboard)
-    #await update.message.reply_game(game_short_name="gggame",reply_markup=reply_markup)
     await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME)
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -76,10 +68,10 @@ def main() -> None:
     # Create the Application and pass it your bot's token.
     application = Application.builder().token(TOKEN).build()
 
-    gamelink_handler = MessageHandler((filters.Regex('🎮Start Playing')),playgame)
+    gamelink_handler = MessageHandler((filters.Regex('🐫Game Introduction')),playgame)
     game_handler = CommandHandler('game',playgame)
 
-    application.add_handler(gamelink_handler)
+    # application.add_handler(gamelink_handler)
     application.add_handler(game_handler)
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button))
