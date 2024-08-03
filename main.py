@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton(text='🎮Start Playing', web_app=WebAppInfo(url="https://game.ohayoaptos.com/camel_app/"))
+    button1 = KeyboardButton(text='🎮Start Playing')
     button2 = KeyboardButton('🐫Game Introduction')
     
 
@@ -76,6 +76,7 @@ def main() -> None:
     application = Application.builder().token(TOKEN).build()
 
     gamelink_handler = MessageHandler((filters.Regex('🐫Game Introduction')),playgame)
+    gamelink_handler = MessageHandler((filters.Regex('🎮Start Playing')),playgame)
     game_handler = CommandHandler('game',playgame)
 
     application.add_handler(gamelink_handler)
