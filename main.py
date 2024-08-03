@@ -38,7 +38,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
 
 async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME)
+    keyboard = [InlineKeyboardButton(text="Play Game", url="https://game.ohayoaptos.com/camel_app/")]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME, reply_markup=reply_markup)
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
@@ -51,7 +53,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # if query.inline_message_id
     # ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,text="????", show_alert=True)
     if query.game_short_name != None :
-        await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://www.google.com/')
+        await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://game.ohayoaptos.com/camel_app/')
     
     # if query.data == None:
     #     await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
@@ -79,7 +81,6 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-
 
 if __name__ == "__main__":
     main()
