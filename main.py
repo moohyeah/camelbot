@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends a message with three inline buttons attached."""
 # 创建按钮
-    button1 = KeyboardButton(text='🎮Start Playing',)
+    button1 = KeyboardButton(text='🎮Start Playing')
     button2 = KeyboardButton('🐫Game Introduction')
     
 
@@ -58,14 +58,11 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.info(query)
     # if query.inline_message_id
     # ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,text="????", show_alert=True)
-    await context.bot.answerCallbackQuery(callback_query_id=cqid,url='https://game.ohayoaptos.com/camel_app/')
+    await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://game.ohayoaptos.com/camel_app/')
     
     # if query.data == None:
     #     await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
 
-    # choose = query.data
-    # if choose == None:
-        
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
