@@ -54,7 +54,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
     cqid = update.callback_query.id
     query = update.callback_query
-    await query.answer()
+    #await query.answer()
     logger.info(query)
     # if query.inline_message_id
     # ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,text="????", show_alert=True)
