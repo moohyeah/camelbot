@@ -31,7 +31,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
 
     # 创建键盘
-    keyboard = [[button1, button2],[KeyboardButton('☎️Help Center'), KeyboardButton('📨Opinions')]]
+    keyboard = [[button1],[button2, KeyboardButton('☎️Help Center')]]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     # 发送消息并附带键盘
