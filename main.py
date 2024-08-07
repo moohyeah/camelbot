@@ -39,7 +39,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
 
 async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    login_url = LoginUrl(url='https://ohayoaptos.com/camel/tg_login')
+    login_url = LoginUrl(url='https://game.ohayoaptos.com/camel/tg_login')
     
     keyboard = [
         [InlineKeyboardButton(text="Play Yalla Jamel", callback_game=CallbackGame(), login_url=login_url)]
@@ -65,11 +65,8 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     #await query.answer()
     logger.info(query.game_short_name)
     # if query.inline_message_id
-    # ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,text="????", show_alert=True)
     if query.game_short_name != None :
         await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://game.ohayoaptos.com/camel_app/')    
-
-
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Displays info on how to use the bot."""
