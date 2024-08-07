@@ -8,7 +8,7 @@ Basic example for a bot that uses inline keyboards. For an in-depth explanation,
 """
 import logging
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update, WebAppInfo
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, Update, WebAppInfo, LoginUrl,CallbackGame
 from telegram.ext import Application, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, filters
 
 TOKEN = "7096248383:AAGpXeaj0a2UglSAckDy6JAjelETMAjiRSA"
@@ -36,16 +36,25 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # 发送消息并附带键盘
     await update.message.reply_text('Welcome on board!', reply_markup=reply_markup)
+    
 
 async def playgame(update:Update,context:ContextTypes.DEFAULT_TYPE):
+    login_url = LoginUrl(url='https://ohayoaptos.com/camel/tg_login')
+    
+    keyboard = [
+        [InlineKeyboardButton(text="Play Yalla Jamel", callback_game=CallbackGame(), login_url=login_url)]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name = GAME_SHORT_GAME, reply_markup = reply_markup)
+
+### 外部链接 ###
+async def playgameinbrower(update:Update,context:ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton(text="Play Yalla Jamel", url="https://game.ohayoaptos.com/camel_app/")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await context.bot.send_photo(chat_id=update.effective_chat.id, 
                                 photo="https://game.ohayoaptos.com/camel_app/vfdd.jpg",
                                 caption="There are 7 slots at the bottom of the game, players only need to place 3 pieces of the same bricks into the slots and they will compete. Brick cannot be moved if there is not one brick above it.", 
                                 reply_markup=reply_markup)
-    # context.bot.send_message()
-    # await context.bot.send_game(chat_id=update.effective_chat.id, game_short_name=GAME_SHORT_GAME, reply_markup=reply_markup)
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Parses the CallbackQuery and updates the message text."""
@@ -58,10 +67,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # if query.inline_message_id
     # ret = await context.bot.answerCallbackQuery(callback_query_id=cqid,text="????", show_alert=True)
     if query.game_short_name != None :
-        await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://game.ohayoaptos.com/camel_app/')
-    
-    # if query.data == None:
-    #     await context.bot.answerCallbackQuery(callback_query_id=cqid,text=GAME_SHORT_GAME,url='https://game.ohayoaptos.com/camel_app/')
+        await context.bot.answerCallbackQuery(callback_query_id=cqid, url='https://game.ohayoaptos.com/camel_app/')    
 
 
 
